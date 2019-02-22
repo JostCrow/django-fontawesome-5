@@ -7,6 +7,7 @@ from . import Icon
 from .app_settings import get_prefix
 from .forms import IconFormField
 from .shims import shims
+from .utils import get_icon_choices
 
 
 prefix = get_prefix()
@@ -17,8 +18,8 @@ class IconField(models.Field):
 
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 60
-        kwargs['blank'] = True
-        super(IconField, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
+        self.choices = get_icon_choices()
 
     def get_internal_type(self):
         return 'CharField'
